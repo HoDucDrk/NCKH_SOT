@@ -1,10 +1,17 @@
+**Yêu cầu:**
+- Python 3.x
+- Opencv-python
+- numpy
+- Pillow
+- Tkinter
+
 **Cách chạy**:
 
 1. Mở cmd cd đến thư mục chứa folder.
 2. Tại cmd chạy câu lệnh:
     - > Scripts\activate
 3. Rồi chạy câu lệnh:
-    - > main.py
+    - > python -u main.py
     - Để chạy chương trình
 
 **Cách sử dụng**
