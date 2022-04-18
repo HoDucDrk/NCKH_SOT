@@ -40,7 +40,6 @@ class Shifts:
     def take_roi(self):
         '''lấy đối tượng cần theo dõi'''
         x, y, w, h = self.select_roi()
-        print(x, y, w, h)
         self.tracking = (x, y, w, h)
         self.roi = self.frame[y:y+h, x:x+h]
 

@@ -28,9 +28,6 @@ class CamShift(Shifts):
                 if CamShift.old_x == 0 and CamShift.old_y == 0:
                     CamShift.status = False
             
-            w, h = ret[1]
-            print(sqrt(w**2 + h**2))
-            
             CamShift.old_x = ret[0][0]
             CamShift.old_y = ret[0][1]
             pts = cv2.boxPoints(ret)
@@ -45,7 +42,7 @@ class CamShift(Shifts):
             else:
                 img = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
                 cv2.putText(img, 'Fail to track the object', (250, 290),
-                            cv2.FONT_HERSHEY_SIMPLEX, 1, (225, 125, 25), 2)
+                            cv2.FONT_HERSHEY_SIMPLEX, 1, (225, 0, 25), 2)
             return dst, img
         else:
             return 'Error'
