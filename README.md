@@ -2,8 +2,11 @@
 - Python 3.x
 - Opencv-python
 - numpy
+> pip install opencv-python
 - Pillow
+> pip install pillow
 - Tkinter
+> pip install tk
 
 **Cách chạy**:
 
