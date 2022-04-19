@@ -43,16 +43,33 @@ $ pip install -r requiments.txt
     
     2.1 `MeanShift` hoặc `CamShift`
     - Sau khi chọn thuật toán sẽ có một cửa sổ. kéo để chọn đối tượng
+
     <img src='./Assets/Select_Roi.png'></img>
+
     - Ấn Enter
     - Tại `Color Detection`
+
     <img src='./Assets/color_detection.png'></img>
+    
     - Chỉnh các giá trị đến khi select được màu mong muốn.
+
     <img src='./Assets/maskAndResult.png'></img>
+    
+    - Ấn `Run`
+
+    2.2 `Multiple instance learning (MIL)`
+    - Kéo rồi chọn đối tượng.
+
+    <img src='./Assets/Select_Roi.png'></img>
+
+    - Ấn Enter
     - Ấn `Run`
 
     2.2 `Lucas-Kanade Optical Flow`
     - Click chuột vào Đối tượng cần theo dõi.
+    - Ấn `Run`
+
+    2.3 `Dense Optical Flow`
     - Ấn `Run`
 
 - `Pause`: Để dừng Video

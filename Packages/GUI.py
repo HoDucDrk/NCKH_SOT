@@ -7,6 +7,8 @@ from PIL import Image, ImageTk
 from Packages.MeanShift import MeanShift
 from Packages.CamShift import CamShift
 from Packages.LucasKanadeOpticalFlow import LucasKanade_OpticalFlow
+from Packages.Dense_OpticalFlow import Dense_OpticalFlow
+from Packages.MIL import MIL
 
 
 # Lớp Window: Tạo ra cửa sổ tên là Single Tracking
@@ -194,8 +196,9 @@ class Window:
         # Tạo một Combobox
         modes = ttk.Combobox(self.master, textvariable=modesVar)
         # Tạo một danh sách lựa chọn
-        modes['values'] = ('MeanShift', 'CamShift',
-                           'Lucas-Kanade Opitcal Flow')
+        modes['values'] = ('MeanShift', 'CamShift', 'MIL',
+                           'Lucas-Kanade Opitcal Flow',
+                           'Dense Optical Flow')
         # Dùng để gọi hàm selectMode khi lựa chọn một phần tử trong list
         modes.bind('<<ComboboxSelected>>', self.selectMode)
         # Chỉ cho phép đọc không cho chỉnh sửa
@@ -269,10 +272,23 @@ class Window:
             self.cap.take_roi()
             self.updateRoi()
             self.delay = 1
-
+        
+        if mode == 'MIL':
+            self.tracker_status = 'mil'
+            self.cap = MIL(path)
+            self.cap.process()
+            self.delay = 1
+            self.update_Lucas()
+            
         if mode == 'Lucas-Kanade Opitcal Flow':
             self.tracker_status = 'lk'
             self.cap = LucasKanade_OpticalFlow(path)
+            self.delay = 1
+            self.update_Lucas()
+
+        if mode == 'Dense Optical Flow':
+            self.tracker_status = 'dense'
+            self.cap = Dense_OpticalFlow(path)
             self.delay = 1
             self.update_Lucas()
 
@@ -338,8 +354,6 @@ class Window:
         Thay các khung hình để
         Cập nhật lại self.canvas
         '''            
-        if self.tracker_status == 'lk':
-            self.canvas_window.bind('<Button-1>', self.cap.select_point)
         if not self.isRun:
             try:
                 mask, frame = self.cap()
