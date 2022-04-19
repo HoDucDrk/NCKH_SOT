@@ -309,10 +309,11 @@ class Window:
             lower, higher = self.setValue()
             self.mask_roi, frame = self.cap.select_color_detection(
                 lower, higher)
+            # mask_re = cv2.resize(self.mask_roi, (200, 200))
             self.frame_roi = ImageTk.PhotoImage(
-                image=Image.fromarray(cv2.resize(frame, (200, 200))))
+                image=Image.fromarray(frame))
             self.mask_roitk = ImageTk.PhotoImage(
-                image=Image.fromarray(cv2.resize(self.mask_roi, (200, 200))))
+                image=Image.fromarray(self.mask_roi))
             self.myImg_roi = self.result_detection.create_image(
                 0, 0, image=self.frame_roi, anchor=tkinter.NW)
             self.myMask_roitk = self.color_detection.create_image(
