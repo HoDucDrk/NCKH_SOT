@@ -2,22 +2,34 @@
 - Python 3.x
 - Opencv-python
 - numpy
-> `pip install opencv-python`
+```
+$ pip install opencv-python
+```
 - Pillow
-> `pip install pillow`
+```
+$ pip install pillow
+```
 - Tkinter
-> `pip install tk`
+```
+$ pip install tk
+```
 
 - Nếu chưa có các thư viện trên thì chạy câu lệnh sau trong cmd:
-> `pip install -r requiments.txt`
+```
+$ pip install -r requiments.txt
+```
 
 **Cách chạy**:
 
 1. Mở cmd cd đến thư mục chứa folder.
 2. Tại cmd chạy câu lệnh:
-    - > `Scripts\activate`
+    ```
+    $ Scripts\activate
+    ```
 3. Rồi chạy câu lệnh:
-    - > `python -u main.py`
+    ```
+    $ python -u main.py
+    ```
     - Để chạy chương trình
 
 **Cách sử dụng**
