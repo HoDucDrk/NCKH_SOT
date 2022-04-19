@@ -10,6 +10,7 @@
 
 - Nếu chưa có các thư viện trên thì chạy câu lệnh sau trong cmd:
 > pip install -r requiments.txt
+
 **Cách chạy**:
 
 1. Mở cmd cd đến thư mục chứa folder.
