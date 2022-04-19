@@ -72,7 +72,7 @@ class Shifts:
     def threshold_mask(self, mask):
         """Cắt ngưỡng cho mask"""
         values = np.unique(mask)
-        _, new_mask = cv2.threshold(mask, values[-2], values[-1], cv2.THRESH_BINARY)
+        _, new_mask = cv2.threshold(mask, values[-4], values[-1], cv2.THRESH_BINARY)
         return new_mask
 
     def image_process(self):

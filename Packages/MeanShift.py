@@ -5,11 +5,13 @@ from Packages.Shift import Shifts
 
 class MeanShift(Shifts):
 
+    old_ret_prev = 0
     old_ret = 0
-    status = True
 
     def __init__(self, video_path):
         super().__init__(video_path)
+        self.count = 0
+        self.status = True
 
     def __call__(self):
         _, frame = self.cap.read()
@@ -22,12 +24,14 @@ class MeanShift(Shifts):
 
         # Sử dụng thuật toán Camshift
         suc, self.tracking = cv2.meanShift(mask, self.tracking, self.term_crit)
-
-        if suc == 0 and MeanShift.old_ret == 0:
-            MeanShift.status = True
+        if suc == 0 and MeanShift.old_ret == 0 and MeanShift.old_ret_prev == 0:
+            self.count += 1
+            if self.count == 5:
+                self.status = False
+        MeanShift.old_ret_prev = MeanShift.old_ret
         MeanShift.old_ret = suc
 
-        if MeanShift.status:
+        if self.status:
             # Cập nhật lại tọa độ
             x, y, w, h = self.tracking
             img2 = cv2.rectangle(frame, (x, y), (x+w, y+h), (0, 255, 0), 2)

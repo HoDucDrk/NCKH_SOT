@@ -262,6 +262,7 @@ class Window:
         if mode == 'MeanShift':
             self.tracker_status = 'ms'
             self.cap = MeanShift(path)
+            self.cap.count = 0
             self.cap.take_roi()
             self.updateRoi()
             self.delay = 1
@@ -325,7 +326,11 @@ class Window:
             lower, higher = self.setValue()
             self.mask_roi, frame = self.cap.select_color_detection(
                 lower, higher)
-            # mask_re = cv2.resize(self.mask_roi, (200, 200))
+            
+            if self.mask_roi.shape[0] <= 200 and self.mask_roi.shape[1] <= 200:
+                self.mask_roi = cv2.resize(self.mask_roi, (200, 200))
+                frame = cv2.resize(frame, (200, 200))
+                
             self.frame_roi = ImageTk.PhotoImage(
                 image=Image.fromarray(frame))
             self.mask_roitk = ImageTk.PhotoImage(
@@ -367,3 +372,4 @@ class Window:
                     self.master.after(self.delay, self.update)
             except:
                 pass
+74
