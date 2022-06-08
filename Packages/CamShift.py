@@ -41,7 +41,7 @@ class CamShift(Shifts):
                         cv2.FONT_HERSHEY_SIMPLEX,1,(0,255,255),2)
             else:
                 img = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
-                cv2.putText(img, 'Fail to track the object', int(250 / self.ratio[0]),
+                cv2.putText(img, 'Fail to track the object', (int(250 / self.ratio[0]), int(290 / self.ratio[1])),
                             cv2.FONT_HERSHEY_SIMPLEX, 1, (225, 0, 25), 2)
             return dst, img
         else:

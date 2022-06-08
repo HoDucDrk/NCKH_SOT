@@ -32,7 +32,7 @@ class MIL(Shifts):
         else:
         
             # Failure on tracking
-            cv2.putText(frame,'Fail to track the object', int(250 / self.ratio[0]),
+            cv2.putText(frame,'Fail to track the object', (int(250 / self.ratio[0]), int(290 / self.ratio[1])),
                         cv2.FONT_HERSHEY_SIMPLEX,1,(25,125,255),2)
         
         return np.zeros_like(frame[:,:,0]), cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
