@@ -9,8 +9,8 @@ class CamShift(Shifts):
     old_x, old_y = 0, 0
     status = True
     
-    def __init__(self,video_path):
-        super().__init__(video_path)
+    def __init__(self, video_path, ratio):
+        super().__init__(video_path, ratio)
     
     def __call__(self):
         ret, frame = self.cap.read()
@@ -41,7 +41,7 @@ class CamShift(Shifts):
                         cv2.FONT_HERSHEY_SIMPLEX,1,(0,255,255),2)
             else:
                 img = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
-                cv2.putText(img, 'Fail to track the object', (250, 290),
+                cv2.putText(img, 'Fail to track the object', int(250 / self.ratio[0]),
                             cv2.FONT_HERSHEY_SIMPLEX, 1, (225, 0, 25), 2)
             return dst, img
         else:

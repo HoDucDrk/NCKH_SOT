@@ -9,8 +9,8 @@ class LucasKanade_OpticalFlow(Shifts):
     old_points = np.array([[]])
     x, y = 0, 0
 
-    def __init__(self, video_path):
-        super().__init__(video_path)
+    def __init__(self, video_path, ratio):
+        super().__init__(video_path, ratio)
         self.lucas_params = dict(winSize=(10, 10),
                                  maxLevel=2,
                                  criteria=(cv2.TERM_CRITERIA_EPS | cv2.TERM_CRITERIA_COUNT, 10, 0.03))

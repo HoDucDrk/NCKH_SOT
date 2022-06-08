@@ -1,9 +1,10 @@
+from turtle import width
 import cv2 
 import numpy as np
 
 class Shifts:
     
-    def __init__(self, video_path):
+    def __init__(self, video_path, ratio):
         '''
         Parameter: 
         - video_path: là một tuple gồm (đường dẫn, bool)
@@ -14,16 +15,19 @@ class Shifts:
         else:
             self.cap = cv2.VideoCapture(path)
         self.mask=None
+        self.ratio = ratio
             
     def resize_video(self, frame):
         '''
         Thay đổi kích thước ảnh về chiều rông: 800 và chiều cao: 600
         Trả về: một ndarray đã được resize kích thước theo thuật toán INTER_AREA
         '''
+        width = int(880 / self.ratio[0])
+        height = int(600 / self.ratio[1])
         try:
-            return cv2.resize(frame, (880, 600), cv2.INTER_AREA)
+            return cv2.resize(frame, (width, height), cv2.INTER_AREA)
         except:
-            return np.zeros((800, 600))
+            return np.zeros((width, height))
     
     def select_roi(self):
         '''
@@ -41,7 +45,7 @@ class Shifts:
         '''lấy đối tượng cần theo dõi'''
         x, y, w, h = self.select_roi()
         self.tracking = (x, y, w, h)
-        self.roi = self.frame[y:y+h, x:x+h]
+        self.roi = self.frame[y:y+h, x:x+w]
 
     def select_color_detection(self, lower, higher):
         '''
@@ -72,7 +76,7 @@ class Shifts:
     def threshold_mask(self, mask):
         """Cắt ngưỡng cho mask"""
         values = np.unique(mask)
-        _, new_mask = cv2.threshold(mask, values[-4], values[-1], cv2.THRESH_BINARY)
+        _, new_mask = cv2.threshold(mask, values[-3], values[-1], cv2.THRESH_BINARY)
         return new_mask
 
     def image_process(self):

@@ -8,8 +8,8 @@ class MeanShift(Shifts):
     old_ret_prev = 0
     old_ret = 0
 
-    def __init__(self, video_path):
-        super().__init__(video_path)
+    def __init__(self, video_path, ratio):
+        super().__init__(video_path, ratio)
         self.count = 0
         self.status = True
 
@@ -40,6 +40,6 @@ class MeanShift(Shifts):
                         cv2.FONT_HERSHEY_SIMPLEX, 1, (0, 255, 255), 2)
         else:
             img = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
-            cv2.putText(img, 'Fail to track the object', (250, 290),
+            cv2.putText(img, 'Fail to track the object', (int(250 / self.ratio[0]), int(290 / self.ratio[1])),
                         cv2.FONT_HERSHEY_SIMPLEX, 1, (255, 0, 0), 2)
         return mask, img
